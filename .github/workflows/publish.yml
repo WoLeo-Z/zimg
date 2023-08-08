@@ -30,13 +30,13 @@ jobs:
           #npm install -g webp-batch-convert@0.1.2
           #cwebp-batch --in rawimg --out webpimg -q 75 -quiet
           npx webp-batch-convert@0.1.2 --in rawimg --out webpimg -q 75 -quiet
-          cp webpimg/*.webp rawimg/
+          mv webpimg/*.webp rawimg/
           
       # Publish to npm
       - name: Publish Package
         run: |
-          git config --global user.email "icolabot@e.yfun.top"
-          git config --global user.name "iColaBot"
+          git config --global user.email "1141783989zh@gmail.com"
+          git config --global user.name "WoLeo-Z"
           npm version patch
           npm publish
         env:
