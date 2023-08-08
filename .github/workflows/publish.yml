@@ -31,6 +31,7 @@ jobs:
           #cwebp-batch --in rawimg --out webpimg -q 75 -quiet
           npx webp-batch-convert@0.1.2 --in rawimg --out webpimg -q 75 -quiet
           mv webpimg/*.webp rawimg/
+          git add . && git commit -m "Convert to WebP"
           
       # Publish to npm
       - name: Publish Package
