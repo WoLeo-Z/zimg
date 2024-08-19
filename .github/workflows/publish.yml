@@ -24,9 +24,8 @@ jobs:
 
       - name: Convert WebP
         run: |
-          npx webp-batch-convert@0.1.2 --in img --out webp -q 80 -quiet
-          mv webp/*.webp img/
-          git config --global user.email "me@wol1.xyz"
+          npx webp-batch-convert@0.1.2 --in img --out img -q 80 -quiet
+          git config --global user.email "me@w0l.top"
           git config --global user.name "WoLeo-Z"
           git add . && git commit -m "Convert to WebP"
 
@@ -39,10 +38,8 @@ jobs:
 
       - name: Clean up
         run: |
-          rm -rf webp
           rm -rf img
           rm -rf files
-          mkdir webp && touch webp/.gitkeep
           mkdir img && touch img/.gitkeep
           mkdir files && touch files/.gitkeep
           git add -A
