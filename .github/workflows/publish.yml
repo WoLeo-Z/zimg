@@ -10,14 +10,13 @@ on:
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
-    # Clone repo
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: master
-      # Install Node.js
-      - name: Setup Node
+      
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
@@ -25,13 +24,12 @@ jobs:
 
       - name: Convert WebP
         run: |
-          npx webp-batch-convert@0.1.2 --in img --out webp -q 75 -quiet
+          npx webp-batch-convert@0.1.2 --in img --out webp -q 80 -quiet
           mv webp/*.webp img/
           git config --global user.email "me@wol1.xyz"
           git config --global user.name "WoLeo-Z"
           git add . && git commit -m "Convert to WebP"
 
-      # Publish to npm
       - name: Publish Package
         run: |
           npm version patch
@@ -39,15 +37,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
-      - name: Clean
+      - name: Clean up
         run: |
-          rm -rf webp/*
-          rm -rf img/*
-          touch webp/.gitkeep
-          touch img/.gitkeep
-
-      - name: Push
-        run: |
+          rm -rf webp
+          rm -rf img
+          rm -rf files
+          mkdir webp && touch webp/.gitkeep
+          mkdir img && touch img/.gitkeep
+          mkdir files && touch files/.gitkeep
           git add -A
           git commit -m "Publish"
           git push origin master
